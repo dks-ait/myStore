@@ -5,8 +5,9 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
+group :development, :test do
+  gem 'sqlite3'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -39,3 +40,8 @@ gem 'jquery-rails'
 gem 'spree', '1.1.2'
 gem 'spree_usa_epay'
 gem 'spree_skrill'
+
+group :production do
+  gem 'thin'
+  gem 'pg'
+end
