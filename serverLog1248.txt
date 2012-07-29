@@ -1,0 +1,1041 @@
+=> Booting WEBrick
+=> Rails 3.2.6 application starting in development on http://0.0.0.0:3000
+=> Call with -d to detach
+=> Ctrl-C to shutdown server
+Connecting to database specified by database.yml
+  [1m[36m (2.0ms)[0m  [1mselect owner_id, owner_type, name, value from spree_preferences where `key` is null[0m
+  [1m[35mSpree::Preference Load (1.0ms)[0m  SELECT "spree_preferences".* FROM "spree_preferences" WHERE ("spree_preferences"."key" IS NOT NULL) AND ("spree_preferences"."value_type" IS NOT NULL)
+  [1m[36mSpree::MailMethod Load (0.0ms)[0m  [1mSELECT "spree_mail_methods".* FROM "spree_mail_methods" WHERE "spree_mail_methods"."environment" = 'development' LIMIT 1[0m
+
+
+Started GET "/" for 127.0.0.1 at 2012-07-29 13:17:31 +0530
+Processing by Spree::HomeController#index as HTML
+  [1m[35mSpree::User Load (0.0ms)[0m  SELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1
+  [1m[36mSpree::Order Load (0.0ms)[0m  [1mSELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1[0m
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[35mSpree::Taxonomy Load (0.0ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)[0m
+  [1m[35mSpree::Taxon Load (1.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"
+  [1m[36mEXPLAIN (0.0ms)[0m  [1mEXPLAIN QUERY PLAN SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL[0m
+  [1m[35mEXPLAIN (0.0ms)[0m  EXPLAIN QUERY PLAN SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)
+  [1m[36mEXPLAIN (0.0ms)[0m  [1mEXPLAIN QUERY PLAN SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"[0m
+EXPLAIN for: SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL
+0|0|1|SEARCH TABLE spree_taxons USING INDEX index_taxons_on_parent_id (parent_id=?) (~10 rows)
+0|1|0|SEARCH TABLE spree_taxonomies USING INTEGER PRIMARY KEY (rowid=?) (~1 rows)
+
+EXPLAIN for: SELECT "spree_taxons".* FROM "spree_taxons"  WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)
+0|0|0|SEARCH TABLE spree_taxons USING INDEX index_taxons_on_parent_id (parent_id=?) (~2 rows)
+0|0|0|EXECUTE LIST SUBQUERY 1
+
+EXPLAIN for: SELECT "spree_taxons".* FROM "spree_taxons"  WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"
+0|0|0|SEARCH TABLE spree_taxons USING INDEX index_taxons_on_parent_id (parent_id=?) (~20 rows)
+0|0|0|EXECUTE LIST SUBQUERY 1
+0|0|0|USE TEMP B-TREE FOR ORDER BY
+
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (603.0ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:47:31.824408') LIMIT 12 OFFSET 0) subquery_for_count 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:47:31.824408') LIMIT 12 OFFSET 0) subquery_for_count [0m
+  [1m[35mSpree::Product Load (0.0ms)[0m  SELECT "spree_products".* FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:47:31.824408') LIMIT 12 OFFSET 0
+  [1m[36mSpree::Variant Load (0.0ms)[0m  [1mSELECT "spree_variants".* FROM "spree_variants" WHERE "spree_variants"."product_id" IN (187438981, 248786582, 459084718, 1035865702, 1060500593, 1060500594, 1060500595) AND ("spree_variants".is_master = 't')[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981)
+  [1m[36mSpree::Image Load (1.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500593)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500593) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500594)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500594) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500595)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500595) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:47:31.824408')
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (314.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/home/index.html.erb within spree/layouts/spree_application (1084.1ms)
+Compiled html5reset.css  (0ms)  (pid 4768)
+Compiled skeleton.css  (0ms)  (pid 4768)
+Compiled jquery.formalize.css  (6ms)  (pid 4768)
+Compiled store/screen.css  (472ms)  (pid 4768)
+Compiled store/spree_core.css  (772ms)  (pid 4768)
+Compiled store/spree_auth.css  (1ms)  (pid 4768)
+Compiled store/spree_promo.css  (3ms)  (pid 4768)
+Compiled store/all.css  (887ms)  (pid 4768)
+Compiled jquery.js  (1ms)  (pid 4768)
+Compiled jquery_ujs.js  (0ms)  (pid 4768)
+Compiled jquery.validate/jquery.validate.min.js  (0ms)  (pid 4768)
+Compiled jquery.formalize.min.js  (0ms)  (pid 4768)
+Compiled store/checkout.js  (0ms)  (pid 4768)
+Compiled store/product.js  (1ms)  (pid 4768)
+Compiled store/cart.js  (0ms)  (pid 4768)
+Compiled store/spree_core.js  (366ms)  (pid 4768)
+Compiled store/spree_auth.js  (1ms)  (pid 4768)
+Compiled store/spree_promo.js  (1ms)  (pid 4768)
+Compiled store/all.js  (765ms)  (pid 4768)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (1987.1ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IS NULL ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (3.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (15.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (44.0ms)
+  [1m[35mSpree::Tracker Load (0.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (12.0ms)
+Completed 200 OK in 3832ms (Views: 3451.2ms | ActiveRecord: 15.0ms)
+
+
+Started GET "/assets/html5reset.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:35 +0530
+Served asset /html5reset.css - 304 Not Modified (50ms)
+
+
+Started GET "/assets/skeleton.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:35 +0530
+Served asset /skeleton.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery.formalize.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:35 +0530
+Served asset /jquery.formalize.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/store/screen.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:36 +0530
+Served asset /store/screen.css - 304 Not Modified (51ms)
+
+
+Started GET "/assets/store/spree_core.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:36 +0530
+Served asset /store/spree_core.css - 304 Not Modified (55ms)
+
+
+Started GET "/assets/store/spree_auth.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:36 +0530
+Served asset /store/spree_auth.css - 304 Not Modified (99ms)
+
+
+Started GET "/assets/store/spree_promo.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:36 +0530
+Served asset /store/spree_promo.css - 304 Not Modified (96ms)
+
+
+Started GET "/assets/store/all.css?body=1" for 127.0.0.1 at 2012-07-29 13:17:36 +0530
+Served asset /store/all.css - 304 Not Modified (100ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:36 +0530
+Served asset /jquery.js - 304 Not Modified (174ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:37 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:37 +0530
+Served asset /jquery.validate/jquery.validate.min.js - 304 Not Modified (96ms)
+
+
+Started GET "/assets/jquery.formalize.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:37 +0530
+Served asset /jquery.formalize.min.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/store/checkout.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:37 +0530
+Served asset /store/checkout.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/store/product.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:38 +0530
+Served asset /store/product.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/store/cart.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:38 +0530
+Served asset /store/cart.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/store/spree_core.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:38 +0530
+Served asset /store/spree_core.js - 304 Not Modified (13ms)
+
+
+Started GET "/assets/store/spree_auth.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:38 +0530
+Served asset /store/spree_auth.js - 304 Not Modified (15ms)
+
+
+Started GET "/assets/store/spree_promo.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:38 +0530
+Served asset /store/spree_promo.js - 304 Not Modified (11ms)
+
+
+Started GET "/assets/store/all.js?body=1" for 127.0.0.1 at 2012-07-29 13:17:38 +0530
+Served asset /store/all.js - 304 Not Modified (193ms)
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:17:39 +0530
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:17:39 +0530
+Served asset /admin/bg/spree_50.png - 304 Not Modified (218ms)
+Served asset /admin/bg/spree_50.png - 304 Not Modified (218ms)
+
+
+Started GET "/assets/store/select_arrow.gif" for 127.0.0.1 at 2012-07-29 13:17:39 +0530
+Served asset /store/select_arrow.gif - 304 Not Modified (66ms)
+
+
+Started GET "/assets/store/cart.png" for 127.0.0.1 at 2012-07-29 13:17:39 +0530
+Served asset /store/cart.png - 304 Not Modified (85ms)
+
+
+Started GET "/t/categories/clothing" for 127.0.0.1 at 2012-07-29 13:19:02 +0530
+Processing by Spree::TaxonsController#show as HTML
+  Parameters: {"id"=>"categories/clothing"}
+  [1m[36mSpree::User Load (0.0ms)[0m  [1mSELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1[0m
+  [1m[35mSpree::Order Load (0.0ms)[0m  SELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."permalink" = 'categories/clothing' LIMIT 1[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = ? LIMIT 1  [["id", 1001]]
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" >= 2 AND "spree_taxons"."rgt" <= 7) ORDER BY "spree_taxons"."lft"[0m
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[35mSpree::Taxonomy Load (0.0ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) ORDER BY "spree_taxons"."lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (54.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 1001
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 1001[0m
+  [1m[35mSpree::Taxon Load (1.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 1001 ORDER BY "lft"
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products"."id" = "spree_products_taxons"."product_id" WHERE "spree_products_taxons"."taxon_id" = 2000 AND "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:49:03.092628') LIMIT 4) subquery_for_count [0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" >= 3 AND "spree_taxons"."rgt" <= 6) AND ("spree_taxons"."id" != 2000) ORDER BY "spree_taxons"."lft"
+  [1m[36mSpree::Product Load (1.0ms)[0m  [1mSELECT "spree_products".* FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products"."id" = "spree_products_taxons"."product_id" WHERE "spree_products_taxons"."taxon_id" = 2000 AND "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:49:03.092628') LIMIT 4[0m
+  [1m[35mSpree::Product Load (0.0ms)[0m  SELECT "spree_products".* FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products"."id" = "spree_products_taxons"."product_id" WHERE "spree_products_taxons"."taxon_id" = 3000 AND "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:49:03.096628') LIMIT 4
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981)[0m
+  [1m[35mSpree::Image Load (0.0ms)[0m  SELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981) ORDER BY "spree_assets".position LIMIT 1
+  [1m[36mSpree::Variant Load (0.0ms)[0m  [1mSELECT "spree_variants".* FROM "spree_variants" WHERE "spree_variants"."product_id" = 187438981 AND ("spree_variants".is_master = 't') LIMIT 1[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (50.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/taxons/_taxon.html.erb (112.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/taxons/show.html.erb within spree/layouts/spree_application (238.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (9.0ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = 1000 LIMIT 1
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 1000 ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (56.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (69.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (1.0ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) AND ("spree_taxons"."id" != 1001)
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 2 AND "spree_taxons"."rgt" >= 7) AND ("spree_taxons"."id" != 1001) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mSpree::Tracker Load (0.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (1.0ms)
+Completed 200 OK in 585ms (Views: 529.0ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/assets/html5reset.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:03 +0530
+Served asset /html5reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:03 +0530
+Served asset /jquery.formalize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/skeleton.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:03 +0530
+Served asset /skeleton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/screen.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:04 +0530
+Served asset /store/screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:04 +0530
+Served asset /store/spree_core.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:04 +0530
+Served asset /store/spree_auth.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:04 +0530
+Served asset /store/spree_promo.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/all.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:04 +0530
+Served asset /store/all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:04 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:05 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:05 +0530
+Served asset /jquery.validate/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:05 +0530
+Served asset /jquery.formalize.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/checkout.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:05 +0530
+Served asset /store/checkout.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/product.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:05 +0530
+Served asset /store/product.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:05 +0530
+Served asset /store/cart.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/spree_core.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:05 +0530
+Served asset /store/spree_core.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:06 +0530
+Served asset /store/spree_auth.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/spree_promo.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:06 +0530
+Served asset /store/spree_promo.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/all.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:06 +0530
+Served asset /store/all.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:06 +0530
+Served asset /admin/bg/spree_50.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/select_arrow.gif" for 127.0.0.1 at 2012-07-29 13:19:06 +0530
+Served asset /store/select_arrow.gif - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.png" for 127.0.0.1 at 2012-07-29 13:19:06 +0530
+Served asset /store/cart.png - 304 Not Modified (0ms)
+
+
+Started GET "/t/categories/bags" for 127.0.0.1 at 2012-07-29 13:19:09 +0530
+Processing by Spree::TaxonsController#show as HTML
+  Parameters: {"id"=>"categories/bags"}
+  [1m[36mSpree::User Load (0.0ms)[0m  [1mSELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1[0m
+  [1m[35mSpree::Order Load (1.0ms)[0m  SELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."permalink" = 'categories/bags' LIMIT 1[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = ? LIMIT 1  [["id", 1002]]
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" >= 8 AND "spree_taxons"."rgt" <= 9) ORDER BY "spree_taxons"."lft"[0m
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[35mSpree::Taxonomy Load (1.0ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) ORDER BY "spree_taxons"."lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (98.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 1002
+  [1m[36mSpree::Property Load (1.0ms)[0m  [1mSELECT "spree_properties".* FROM "spree_properties" WHERE "spree_properties"."name" = 'brand' LIMIT 1[0m
+  [1m[35mSpree::ProductProperty Load (0.0ms)[0m  SELECT "spree_product_properties".* FROM "spree_product_properties" WHERE "spree_product_properties"."property_id" = 161337574
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_filters.html.erb (46.0ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (1002) AND ("spree_products".available_on <= '2012-07-29 07:49:09.544997') LIMIT 12 OFFSET 0) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (1002) AND ("spree_products".available_on <= '2012-07-29 07:49:09.544997') LIMIT 12 OFFSET 0) subquery_for_count 
+  [1m[36mSpree::Product Load (0.0ms)[0m  [1mSELECT "spree_products".* FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (1002) AND ("spree_products".available_on <= '2012-07-29 07:49:09.544997') LIMIT 12 OFFSET 0[0m
+  [1m[35mSpree::Variant Load (0.0ms)[0m  SELECT "spree_variants".* FROM "spree_variants" WHERE "spree_variants"."product_id" IN (459084718) AND ("spree_variants".is_master = 't')
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718)[0m
+  [1m[35mSpree::Image Load (1.0ms)[0m  SELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718) ORDER BY "spree_assets".position LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (1002) AND ("spree_products".available_on <= '2012-07-29 07:49:09.544997')[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (72.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/taxons/show.html.erb within spree/layouts/spree_application (279.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (10.0ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = 1000 LIMIT 1
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 1000 ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (3.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (16.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (1.0ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) AND ("spree_taxons"."id" != 1002)
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 8 AND "spree_taxons"."rgt" >= 9) AND ("spree_taxons"."id" != 1002) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mSpree::Tracker Load (0.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (1.0ms)
+Completed 200 OK in 546ms (Views: 488.0ms | ActiveRecord: 9.0ms)
+
+
+Started GET "/assets/html5reset.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:10 +0530
+Served asset /html5reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/skeleton.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:10 +0530
+Served asset /skeleton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:10 +0530
+Served asset /jquery.formalize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/screen.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:10 +0530
+Served asset /store/screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:10 +0530
+Served asset /store/spree_core.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:10 +0530
+Served asset /store/spree_auth.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/spree_promo.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:11 +0530
+Served asset /store/spree_promo.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/all.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:11 +0530
+Served asset /store/all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:11 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:11 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:11 +0530
+Served asset /jquery.validate/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:11 +0530
+Served asset /jquery.formalize.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/checkout.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:12 +0530
+Served asset /store/checkout.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/product.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:12 +0530
+Served asset /store/product.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:12 +0530
+Served asset /store/cart.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:12 +0530
+Served asset /store/spree_core.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:12 +0530
+Served asset /store/spree_auth.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:12 +0530
+Served asset /store/spree_promo.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/all.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:12 +0530
+Served asset /store/all.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:13 +0530
+Served asset /admin/bg/spree_50.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/select_arrow.gif" for 127.0.0.1 at 2012-07-29 13:19:13 +0530
+Served asset /store/select_arrow.gif - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.png" for 127.0.0.1 at 2012-07-29 13:19:13 +0530
+Served asset /store/cart.png - 304 Not Modified (0ms)
+
+
+Started GET "/t/brands/ruby-on-rails" for 127.0.0.1 at 2012-07-29 13:19:16 +0530
+Processing by Spree::TaxonsController#show as HTML
+  Parameters: {"id"=>"brands/ruby-on-rails"}
+  [1m[36mSpree::User Load (1.0ms)[0m  [1mSELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1[0m
+  [1m[35mSpree::Order Load (0.0ms)[0m  SELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."permalink" = 'brands/ruby-on-rails' LIMIT 1[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = ? LIMIT 1  [["id", 31989848]]
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" >= 14 AND "spree_taxons"."rgt" <= 15) ORDER BY "spree_taxons"."lft"[0m
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[35mSpree::Taxonomy Load (0.0ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) ORDER BY "spree_taxons"."lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (55.0ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 31989848
+  [1m[36mSpree::Property Load (0.0ms)[0m  [1mSELECT "spree_properties".* FROM "spree_properties" WHERE "spree_properties"."name" = 'brand' LIMIT 1[0m
+  [1m[35mSpree::ProductProperty Load (0.0ms)[0m  SELECT "spree_product_properties".* FROM "spree_product_properties" WHERE "spree_product_properties"."property_id" = 161337574
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_filters.html.erb (5.0ms)
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (31989848) AND ("spree_products".available_on <= '2012-07-29 07:49:16.195377') LIMIT 12 OFFSET 0) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (31989848) AND ("spree_products".available_on <= '2012-07-29 07:49:16.195377') LIMIT 12 OFFSET 0) subquery_for_count 
+  [1m[36mSpree::Product Load (0.0ms)[0m  [1mSELECT "spree_products".* FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (31989848) AND ("spree_products".available_on <= '2012-07-29 07:49:16.195377') LIMIT 12 OFFSET 0[0m
+  [1m[35mSpree::Variant Load (1.0ms)[0m  SELECT "spree_variants".* FROM "spree_variants" WHERE "spree_variants"."product_id" IN (187438981, 1035865702, 459084718, 248786582) AND ("spree_variants".is_master = 't')
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981)[0m
+  [1m[35mSpree::Image Load (1.0ms)[0m  SELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981) ORDER BY "spree_assets".position LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702)[0m
+  [1m[35mSpree::Image Load (0.0ms)[0m  SELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702) ORDER BY "spree_assets".position LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718)[0m
+  [1m[35mSpree::Image Load (1.0ms)[0m  SELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718) ORDER BY "spree_assets".position LIMIT 1
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582)[0m
+  [1m[35mSpree::Image Load (1.0ms)[0m  SELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582) ORDER BY "spree_assets".position LIMIT 1
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (31989848) AND ("spree_products".available_on <= '2012-07-29 07:49:16.195377')[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (134.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/taxons/show.html.erb within spree/layouts/spree_application (228.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (9.0ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[35mSpree::Taxon Load (1.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = 20000 LIMIT 1
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 20000 ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (3.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (16.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (1.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) AND ("spree_taxons"."id" != 31989848)
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 14 AND "spree_taxons"."rgt" >= 15) AND ("spree_taxons"."id" != 31989848) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mSpree::Tracker Load (0.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (1.0ms)
+Completed 200 OK in 494ms (Views: 477.0ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/assets/html5reset.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:16 +0530
+Served asset /html5reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:17 +0530
+Served asset /jquery.formalize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/screen.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:17 +0530
+Served asset /store/screen.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/skeleton.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:17 +0530
+Served asset /skeleton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:17 +0530
+Served asset /store/spree_core.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:17 +0530
+Served asset /store/spree_auth.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:17 +0530
+Served asset /store/spree_promo.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/all.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:17 +0530
+Served asset /store/all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:18 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:18 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:18 +0530
+Served asset /jquery.validate/jquery.validate.min.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/checkout.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:18 +0530
+Served asset /store/checkout.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:18 +0530
+Served asset /jquery.formalize.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/product.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:18 +0530
+Served asset /store/product.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:19 +0530
+Served asset /store/cart.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:19 +0530
+Served asset /store/spree_core.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:19 +0530
+Served asset /store/spree_auth.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/spree_promo.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:19 +0530
+Served asset /store/spree_promo.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/all.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:19 +0530
+Served asset /store/all.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:19 +0530
+Served asset /admin/bg/spree_50.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/select_arrow.gif" for 127.0.0.1 at 2012-07-29 13:19:20 +0530
+Served asset /store/select_arrow.gif - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/cart.png" for 127.0.0.1 at 2012-07-29 13:19:20 +0530
+Served asset /store/cart.png - 304 Not Modified (0ms)
+
+
+Started GET "/t/brands/apache" for 127.0.0.1 at 2012-07-29 13:19:22 +0530
+Processing by Spree::TaxonsController#show as HTML
+  Parameters: {"id"=>"brands/apache"}
+  [1m[36mSpree::User Load (1.0ms)[0m  [1mSELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1[0m
+  [1m[35mSpree::Order Load (0.0ms)[0m  SELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."permalink" = 'brands/apache' LIMIT 1[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = ? LIMIT 1  [["id", 307170551]]
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" >= 18 AND "spree_taxons"."rgt" <= 19) ORDER BY "spree_taxons"."lft"[0m
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[35mSpree::Taxonomy Load (0.0ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) ORDER BY "spree_taxons"."lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (96.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 307170551
+  [1m[36mSpree::Property Load (0.0ms)[0m  [1mSELECT "spree_properties".* FROM "spree_properties" WHERE "spree_properties"."name" = 'brand' LIMIT 1[0m
+  [1m[35mSpree::ProductProperty Load (0.0ms)[0m  SELECT "spree_product_properties".* FROM "spree_product_properties" WHERE "spree_product_properties"."property_id" = 161337574
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_filters.html.erb (4.0ms)
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (307170551) AND ("spree_products".available_on <= '2012-07-29 07:49:23.092772') LIMIT 12 OFFSET 0) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (307170551) AND ("spree_products".available_on <= '2012-07-29 07:49:23.092772') LIMIT 12 OFFSET 0) subquery_for_count 
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (307170551) AND ("spree_products".available_on <= '2012-07-29 07:49:23.092772')[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (60.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/taxons/show.html.erb within spree/layouts/spree_application (194.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (10.0ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[35mSpree::Taxon Load (1.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = 20000 LIMIT 1
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 20000 ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (4.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (16.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (1.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) AND ("spree_taxons"."id" != 307170551)
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 18 AND "spree_taxons"."rgt" >= 19) AND ("spree_taxons"."id" != 307170551) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mSpree::Tracker Load (1.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (45.0ms)
+Completed 200 OK in 416ms (Views: 405.0ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/assets/html5reset.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:23 +0530
+Served asset /html5reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/skeleton.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:23 +0530
+Served asset /skeleton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:23 +0530
+Served asset /jquery.formalize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/screen.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:24 +0530
+Served asset /store/screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:24 +0530
+Served asset /store/spree_core.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:24 +0530
+Served asset /store/spree_auth.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:24 +0530
+Served asset /store/spree_promo.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/all.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:24 +0530
+Served asset /store/all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:24 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:25 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:25 +0530
+Served asset /jquery.validate/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:25 +0530
+Served asset /jquery.formalize.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/checkout.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:25 +0530
+Served asset /store/checkout.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/product.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:25 +0530
+Served asset /store/product.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:25 +0530
+Served asset /store/cart.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:26 +0530
+Served asset /store/spree_core.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:26 +0530
+Served asset /store/spree_auth.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:26 +0530
+Served asset /store/spree_promo.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/all.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:26 +0530
+Served asset /store/all.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/select_arrow.gif" for 127.0.0.1 at 2012-07-29 13:19:26 +0530
+Served asset /store/select_arrow.gif - 304 Not Modified (0ms)
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:26 +0530
+Served asset /admin/bg/spree_50.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.png" for 127.0.0.1 at 2012-07-29 13:19:26 +0530
+Served asset /store/cart.png - 304 Not Modified (0ms)
+
+
+Started GET "/t/brands/spree" for 127.0.0.1 at 2012-07-29 13:19:28 +0530
+Processing by Spree::TaxonsController#show as HTML
+  Parameters: {"id"=>"brands/spree"}
+  [1m[36mSpree::User Load (1.0ms)[0m  [1mSELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1[0m
+  [1m[35mSpree::Order Load (0.0ms)[0m  SELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."permalink" = 'brands/spree' LIMIT 1[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = ? LIMIT 1  [["id", 558398358]]
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" >= 20 AND "spree_taxons"."rgt" <= 21) ORDER BY "spree_taxons"."lft"[0m
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[35mSpree::Taxonomy Load (0.0ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)[0m
+  [1m[35mSpree::Taxon Load (1.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) ORDER BY "spree_taxons"."lft"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) ORDER BY "spree_taxons"."lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (54.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 558398358
+  [1m[36mSpree::Property Load (0.0ms)[0m  [1mSELECT "spree_properties".* FROM "spree_properties" WHERE "spree_properties"."name" = 'brand' LIMIT 1[0m
+  [1m[35mSpree::ProductProperty Load (0.0ms)[0m  SELECT "spree_product_properties".* FROM "spree_product_properties" WHERE "spree_product_properties"."property_id" = 161337574
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_filters.html.erb (4.0ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (558398358) AND ("spree_products".available_on <= '2012-07-29 07:49:28.899104') LIMIT 12 OFFSET 0) subquery_for_count [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (558398358) AND ("spree_products".available_on <= '2012-07-29 07:49:28.899104') LIMIT 12 OFFSET 0) subquery_for_count 
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spree_products" INNER JOIN "spree_products_taxons" ON "spree_products_taxons"."product_id" = "spree_products"."id" INNER JOIN "spree_taxons" ON "spree_taxons"."id" = "spree_products_taxons"."taxon_id" WHERE "spree_products"."deleted_at" IS NULL AND "spree_taxons"."id" IN (558398358) AND ("spree_products".available_on <= '2012-07-29 07:49:28.899104')[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (16.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/taxons/show.html.erb within spree/layouts/spree_application (195.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (10.0ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[35mSpree::Taxon Load (1.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."id" = 20000 LIMIT 1
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" = 20000 ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (47.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (60.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (1.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) AND ("spree_taxons"."id" != 558398358)
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE ("spree_taxons"."lft" <= 20 AND "spree_taxons"."rgt" >= 21) AND ("spree_taxons"."id" != 558398358) ORDER BY "spree_taxons"."lft"[0m
+  [1m[35mSpree::Tracker Load (1.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (1.0ms)
+Completed 200 OK in 420ms (Views: 367.0ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/assets/html5reset.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:29 +0530
+Served asset /html5reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/skeleton.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:29 +0530
+Served asset /skeleton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:29 +0530
+Served asset /jquery.formalize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/screen.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:30 +0530
+Served asset /store/screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:30 +0530
+Served asset /store/spree_core.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:30 +0530
+Served asset /store/spree_auth.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/spree_promo.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:30 +0530
+Served asset /store/spree_promo.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/all.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:30 +0530
+Served asset /store/all.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:30 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:31 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:31 +0530
+Served asset /jquery.validate/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:31 +0530
+Served asset /jquery.formalize.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/checkout.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:31 +0530
+Served asset /store/checkout.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/product.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:31 +0530
+Served asset /store/product.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:31 +0530
+Served asset /store/cart.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:32 +0530
+Served asset /store/spree_core.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:32 +0530
+Served asset /store/spree_promo.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/spree_auth.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:32 +0530
+Served asset /store/spree_auth.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/all.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:32 +0530
+Served asset /store/all.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:32 +0530
+Served asset /admin/bg/spree_50.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/select_arrow.gif" for 127.0.0.1 at 2012-07-29 13:19:32 +0530
+Served asset /store/select_arrow.gif - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.png" for 127.0.0.1 at 2012-07-29 13:19:33 +0530
+Served asset /store/cart.png - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-07-29 13:19:34 +0530
+Processing by Spree::HomeController#index as HTML
+  [1m[36mSpree::User Load (0.0ms)[0m  [1mSELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1[0m
+  [1m[35mSpree::Order Load (1.0ms)[0m  SELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[36mSpree::Taxonomy Load (0.0ms)[0m  [1mSELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL[0m
+  [1m[35mSpree::Taxon Load (1.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (8.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:49:35.100459') LIMIT 12 OFFSET 0) subquery_for_count 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:49:35.100459') LIMIT 12 OFFSET 0) subquery_for_count [0m
+  [1m[35mSpree::Product Load (0.0ms)[0m  SELECT "spree_products".* FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:49:35.100459') LIMIT 12 OFFSET 0
+  [1m[36mSpree::Variant Load (0.0ms)[0m  [1mSELECT "spree_variants".* FROM "spree_variants" WHERE "spree_variants"."product_id" IN (187438981, 248786582, 459084718, 1035865702, 1060500593, 1060500594, 1060500595) AND ("spree_variants".is_master = 't')[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718)
+  [1m[36mSpree::Image Load (1.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500593)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500593) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500594)
+  [1m[36mSpree::Image Load (1.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500594) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500595)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500595) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:49:35.100459')
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (136.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/home/index.html.erb within spree/layouts/spree_application (209.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (9.0ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IS NULL ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (2.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (15.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (1.0ms)
+  [1m[35mSpree::Tracker Load (0.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (1.0ms)
+Completed 200 OK in 441ms (Views: 430.0ms | ActiveRecord: 7.0ms)
+
+
+Started GET "/assets/html5reset.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:35 +0530
+Served asset /html5reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/skeleton.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:35 +0530
+Served asset /skeleton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:36 +0530
+Served asset /jquery.formalize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/screen.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:36 +0530
+Served asset /store/screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:36 +0530
+Served asset /store/spree_core.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:36 +0530
+Served asset /store/spree_auth.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:36 +0530
+Served asset /store/spree_promo.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/all.css?body=1" for 127.0.0.1 at 2012-07-29 13:19:36 +0530
+Served asset /store/all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:36 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:37 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:37 +0530
+Served asset /jquery.validate/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.formalize.min.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:37 +0530
+Served asset /jquery.formalize.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/checkout.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:37 +0530
+Served asset /store/checkout.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/product.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:37 +0530
+Served asset /store/product.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/cart.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:37 +0530
+Served asset /store/cart.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_core.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+Served asset /store/spree_core.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_auth.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+Served asset /store/spree_auth.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/spree_promo.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+Served asset /store/spree_promo.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/all.js?body=1" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+Served asset /store/all.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+
+
+Started GET "/assets/admin/bg/spree_50.png" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+Served asset /admin/bg/spree_50.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store/select_arrow.gif" for 127.0.0.1 at 2012-07-29 13:19:38 +0530
+Served asset /store/select_arrow.gif - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store/cart.png" for 127.0.0.1 at 2012-07-29 13:19:39 +0530
+Served asset /store/cart.png - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-07-29 13:22:54 +0530
+Processing by Spree::HomeController#index as HTML
+  [1m[36mSpree::User Load (0.0ms)[0m  [1mSELECT "spree_users".* FROM "spree_users" WHERE "spree_users"."id" = 1057526562 LIMIT 1[0m
+  [1m[35mSpree::Order Load (0.0ms)[0m  SELECT "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."user_id" = 1057526562 AND "spree_orders"."completed_at" IS NULL ORDER BY created_at ASC LIMIT 1
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_analytics_header' matched 1 times with '[data-hook='inside_head']'
+  [1m[36mSpree::Taxonomy Load (0.0ms)[0m  [1mSELECT "spree_taxonomies".* FROM "spree_taxonomies" INNER JOIN "spree_taxons" ON "spree_taxons"."taxonomy_id" = "spree_taxonomies"."id" AND "spree_taxons"."parent_id" IS NULL[0m
+  [1m[35mSpree::Taxon Load (0.0ms)[0m  SELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."taxonomy_id" IN (854451430, 475199832) AND ("spree_taxons"."parent_id" IS NULL)
+  [1m[36mSpree::Taxon Load (0.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IN (1000, 20000) ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_taxonomies.html.erb (7.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:52:54.583869') LIMIT 12 OFFSET 0) subquery_for_count 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:52:54.583869') LIMIT 12 OFFSET 0) subquery_for_count [0m
+  [1m[35mSpree::Product Load (0.0ms)[0m  SELECT "spree_products".* FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:52:54.583869') LIMIT 12 OFFSET 0
+  [1m[36mSpree::Variant Load (0.0ms)[0m  [1mSELECT "spree_variants".* FROM "spree_variants" WHERE "spree_variants"."product_id" IN (187438981, 248786582, 459084718, 1035865702, 1060500593, 1060500594, 1060500595) AND ("spree_variants".is_master = 't')[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981)
+  [1m[36mSpree::Image Load (1.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 187438981) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 248786582) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 459084718) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1035865702) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500593)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500593) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500594)
+  [1m[36mSpree::Image Load (0.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500594) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500595)
+  [1m[36mSpree::Image Load (1.0ms)[0m  [1mSELECT "spree_assets".* FROM "spree_assets" LEFT JOIN "spree_variants" ON "spree_variants".id = "spree_assets".viewable_id WHERE "spree_assets"."type" IN ('Spree::Image') AND ("spree_variants".product_id = 1060500595) ORDER BY "spree_assets".position LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND ("spree_products".available_on <= '2012-07-29 07:52:54.583869')
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_products.html.erb (132.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/home/index.html.erb within spree/layouts/spree_application (203.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_head.html.erb (10.0ms)
+[1;32mDeface:[0m 1 overrides found for 'spree/shared/_nav_bar'
+[1;32mDeface:[0m 'auth_shared_login_bar' matched 1 times with 'li#search-bar'
+  [1m[36mSpree::Taxon Load (1.0ms)[0m  [1mSELECT "spree_taxons".* FROM "spree_taxons" WHERE "spree_taxons"."parent_id" IS NULL ORDER BY "lft"[0m
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_search.html.erb (3.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_nav_bar.html.erb (15.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_store_menu.html.erb (1.0ms)
+  [1m[35mSpree::Tracker Load (0.0ms)[0m  SELECT "spree_trackers".* FROM "spree_trackers" WHERE "spree_trackers"."active" = 't' AND "spree_trackers"."environment" = 'development' LIMIT 1
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/spree_core-1.1.2/app/views/spree/shared/_google_analytics.html.erb (1.0ms)
+Completed 200 OK in 410ms (Views: 401.0ms | ActiveRecord: 4.0ms)
